@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=70", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "windowstolinux"
+version = "0.1.0"
+description = "Analysiert einen Windows-PC und erstellt einen PDF-Migrationsbericht fuer Linux Mint"
+requires-python = ">=3.12"
+dependencies = [
+    "psutil>=6.0",
+    "wmi>=1.5.1",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "jinja2>=3.1",
+    "weasyprint>=62.0",
+    "customtkinter>=5.2",
+    "pyphen>=0.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-mock>=3.14",
+    "pytest-httpx>=0.30",
+]
+
+[project.scripts]
+windowstolinux = "windowstolinux.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["windowstolinux*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"
+
+[tool.pyright]
+pythonVersion = "3.12"
+strict = true

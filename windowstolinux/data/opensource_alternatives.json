@@ -1,0 +1,300 @@
+{
+  "_comment": "Open-source Linux alternatives for Windows apps without a direct port. Triggers yellow category. Keys are normalized lowercase names.",
+  "adobe after effects": {
+    "alternative": "Natron",
+    "linux_package": "natron",
+    "install_via": "apt"
+  },
+  "adobe bridge": {
+    "alternative": "digiKam",
+    "linux_package": "org.kde.digikam",
+    "install_via": "flatpak"
+  },
+  "adobe dreamweaver": {
+    "alternative": "BlueGriffon",
+    "linux_package": "bluefish",
+    "install_via": "apt"
+  },
+  "adobe indesign": {
+    "alternative": "Scribus",
+    "linux_package": "scribus",
+    "install_via": "apt"
+  },
+  "adobe xd": {
+    "alternative": "Penpot",
+    "linux_package": "io.penpot.Penpot",
+    "install_via": "flatpak"
+  },
+  "audacity": {
+    "alternative": "Audacity",
+    "linux_package": "org.audacityteam.Audacity",
+    "install_via": "flatpak"
+  },
+  "camtasia": {
+    "alternative": "Kdenlive",
+    "linux_package": "org.kde.kdenlive",
+    "install_via": "flatpak"
+  },
+  "ccleaner": {
+    "alternative": "BleachBit",
+    "linux_package": "bleachbit",
+    "install_via": "apt",
+    "note": "BleachBit reinigt Temp-Dateien und Browserdaten"
+  },
+  "cyberduck": {
+    "alternative": "FileZilla",
+    "linux_package": "filezilla",
+    "install_via": "apt"
+  },
+  "ditto": {
+    "alternative": "CopyQ",
+    "linux_package": "com.github.hluk.CopyQ",
+    "install_via": "flatpak"
+  },
+  "everything": {
+    "alternative": "Catfish",
+    "linux_package": "catfish",
+    "install_via": "apt"
+  },
+  "f.lux": {
+    "alternative": "Redshift",
+    "linux_package": "redshift",
+    "install_via": "apt"
+  },
+  "foobar2000": {
+    "alternative": "Deadbeef",
+    "linux_package": "deadbeef",
+    "install_via": "apt"
+  },
+  "foxit reader": {
+    "alternative": "Okular",
+    "linux_package": "okular",
+    "install_via": "apt"
+  },
+  "handbrake": {
+    "alternative": "HandBrake",
+    "linux_package": "fr.handbrake.ghb",
+    "install_via": "flatpak"
+  },
+  "imgburn": {
+    "alternative": "Brasero",
+    "linux_package": "brasero",
+    "install_via": "apt"
+  },
+  "irfanview": {
+    "alternative": "gThumb",
+    "linux_package": "gthumb",
+    "install_via": "apt"
+  },
+  "k-lite codec pack": {
+    "alternative": "VLC",
+    "linux_package": "vlc",
+    "install_via": "apt",
+    "note": "VLC spielt alle Formate ohne zusätzliche Codecs ab"
+  },
+  "libreoffice": {
+    "alternative": "LibreOffice",
+    "linux_package": "libreoffice",
+    "install_via": "apt"
+  },
+  "makemkv": {
+    "alternative": "MakeMKV",
+    "linux_package": "makemkv-oss",
+    "install_via": "apt"
+  },
+  "malwarebytes": {
+    "alternative": "ClamAV",
+    "linux_package": "clamav",
+    "install_via": "apt",
+    "note": "Linux benötigt keinen Antivirus für den Alltag"
+  },
+  "media player classic": {
+    "alternative": "VLC",
+    "linux_package": "vlc",
+    "install_via": "apt"
+  },
+  "microsoft to do": {
+    "alternative": "GNOME To Do",
+    "linux_package": "org.gnome.Todo",
+    "install_via": "flatpak"
+  },
+  "mpc-hc": {
+    "alternative": "VLC",
+    "linux_package": "vlc",
+    "install_via": "apt"
+  },
+  "musicbee": {
+    "alternative": "Rhythmbox",
+    "linux_package": "rhythmbox",
+    "install_via": "apt"
+  },
+  "nordvpn": {
+    "alternative": "ProtonVPN",
+    "linux_package": "protonvpn-stable",
+    "install_via": "apt",
+    "note": "ProtonVPN und MullvadVPN bieten Linux-Clients an"
+  },
+  "notepad++": {
+    "alternative": "Kate",
+    "linux_package": "org.kde.kate",
+    "install_via": "flatpak"
+  },
+  "openoffice": {
+    "alternative": "LibreOffice",
+    "linux_package": "libreoffice",
+    "install_via": "apt"
+  },
+  "paint": {
+    "alternative": "Pinta",
+    "linux_package": "org.xfce.mousepad",
+    "install_via": "apt"
+  },
+  "picasa": {
+    "alternative": "Shotwell",
+    "linux_package": "shotwell",
+    "install_via": "apt"
+  },
+  "potplayer": {
+    "alternative": "VLC",
+    "linux_package": "vlc",
+    "install_via": "apt"
+  },
+  "powerdvd": {
+    "alternative": "VLC",
+    "linux_package": "vlc",
+    "install_via": "apt"
+  },
+  "procmon": {
+    "alternative": "sysdig",
+    "linux_package": "sysdig",
+    "install_via": "apt"
+  },
+  "recuva": {
+    "alternative": "TestDisk/PhotoRec",
+    "linux_package": "testdisk",
+    "install_via": "apt"
+  },
+  "sharex": {
+    "alternative": "Flameshot",
+    "linux_package": "org.flameshot.Flameshot",
+    "install_via": "flatpak"
+  },
+  "speccy": {
+    "alternative": "HardInfo",
+    "linux_package": "hardinfo",
+    "install_via": "apt"
+  },
+  "subtitleedit": {
+    "alternative": "Gaupol",
+    "linux_package": "gaupol",
+    "install_via": "apt"
+  },
+  "sumatrapdf": {
+    "alternative": "Okular",
+    "linux_package": "okular",
+    "install_via": "apt"
+  },
+  "teamspeak": {
+    "alternative": "Mumble",
+    "linux_package": "mumble",
+    "install_via": "apt"
+  },
+  "total commander": {
+    "alternative": "Double Commander",
+    "linux_package": "org.doublecmd.DoubleCmd",
+    "install_via": "flatpak"
+  },
+  "virtualbox": {
+    "alternative": "VirtualBox",
+    "linux_package": "virtualbox",
+    "install_via": "apt",
+    "note": "VirtualBox ist für Linux verfügbar"
+  },
+  "winpcap": {
+    "alternative": "libpcap",
+    "linux_package": "libpcap-dev",
+    "install_via": "apt"
+  },
+  "wireshark": {
+    "alternative": "Wireshark",
+    "linux_package": "wireshark",
+    "install_via": "apt"
+  },
+  "xmedia recode": {
+    "alternative": "HandBrake",
+    "linux_package": "fr.handbrake.ghb",
+    "install_via": "flatpak"
+  },
+  "battle.net": {
+    "alternative": "Lutris",
+    "linux_package": "net.lutris.Lutris",
+    "install_via": "flatpak",
+    "note": "Lutris verwaltet Windows-Spiele über Wine und Proton"
+  },
+  "cpu-z": {
+    "alternative": "HardInfo",
+    "linux_package": "hardinfo",
+    "install_via": "apt"
+  },
+  "crystaldiskinfo": {
+    "alternative": "GNOME Festplatte",
+    "linux_package": "gnome-disk-utility",
+    "install_via": "apt"
+  },
+  "gpu-z": {
+    "alternative": "HardInfo",
+    "linux_package": "hardinfo",
+    "install_via": "apt"
+  },
+  "hwmonitor": {
+    "alternative": "psensor",
+    "linux_package": "psensor",
+    "install_via": "apt"
+  },
+  "minecraft": {
+    "alternative": "Prism Launcher",
+    "linux_package": "org.prismlauncher.PrismLauncher",
+    "install_via": "flatpak"
+  },
+  "paint shop pro": {
+    "alternative": "GIMP",
+    "linux_package": "org.gimp.GIMP",
+    "install_via": "flatpak"
+  },
+  "process explorer": {
+    "alternative": "GNOME Systemmonitor",
+    "linux_package": "gnome-system-monitor",
+    "install_via": "apt"
+  },
+  "remote desktop connection": {
+    "alternative": "Remmina",
+    "linux_package": "org.remmina.Remmina",
+    "install_via": "flatpak"
+  },
+  "sketchup": {
+    "alternative": "FreeCAD",
+    "linux_package": "org.freecad.FreeCAD",
+    "install_via": "flatpak"
+  },
+  "treesize": {
+    "alternative": "Baobab",
+    "linux_package": "baobab",
+    "install_via": "apt"
+  },
+  "ubisoft connect": {
+    "alternative": "Heroic Games Launcher",
+    "linux_package": "com.heroicgameslauncher.hgl",
+    "install_via": "flatpak",
+    "note": "Heroic spielt einige Ubisoft-Spiele über Wine ab"
+  },
+  "windirstat": {
+    "alternative": "Baobab",
+    "linux_package": "baobab",
+    "install_via": "apt"
+  },
+  "winscp": {
+    "alternative": "FileZilla",
+    "linux_package": "filezilla",
+    "install_via": "apt"
+  }
+}

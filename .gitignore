@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+
+# PyInstaller
+/dist/
+/build/
+
+# Tests & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# App-Laufzeitdaten (Windows)
+*.db
+*.log
+
+# Generated files
+create_icon.py
+demo_report.html
+demo_report.pdf
+
+# Secrets / lokale Konfiguration
+.env
+*.local
+tests/

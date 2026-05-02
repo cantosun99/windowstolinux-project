@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <title>Linux-Migrationsbericht</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 2cm 2cm 2.5cm 2cm;
+    }
+
+    body {
+      font-family: "DejaVu Sans", Arial, sans-serif;
+      font-size: 10pt;
+      color: #111827;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Header                                                               */
+    /* ------------------------------------------------------------------ */
+
+    .report-header {
+      background: #1e3a5f;
+      color: #ffffff;
+      padding: 18px 22px;
+      margin-bottom: 22px;
+    }
+
+    .report-header h1 {
+      margin: 0 0 4px 0;
+      font-size: 18pt;
+      font-weight: bold;
+    }
+
+    .report-header .subtitle {
+      margin: 0;
+      font-size: 9pt;
+      opacity: 0.75;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Summary stats bar                                                    */
+    /* ------------------------------------------------------------------ */
+
+    .stats-bar {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 22px;
+      border: 1px solid #e5e7eb;
+    }
+
+    .stats-bar td {
+      text-align: center;
+      padding: 12px 8px;
+      border-right: 1px solid #e5e7eb;
+    }
+
+    .stats-bar td:last-child {
+      border-right: none;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 22pt;
+      font-weight: bold;
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 8pt;
+      color: #6b7280;
+    }
+
+    .stat-green .stat-number  { color: #16a34a; }
+    .stat-yellow .stat-number { color: #b45309; }
+    .stat-red .stat-number    { color: #dc2626; }
+
+    /* ------------------------------------------------------------------ */
+    /* Overall verdict box                                                  */
+    /* ------------------------------------------------------------------ */
+
+    .verdict-box {
+      padding: 12px 16px;
+      margin-bottom: 24px;
+      border-left: 5px solid;
+    }
+
+    .verdict-green  { background: #f0fdf4; border-color: #16a34a; }
+    .verdict-yellow { background: #fffbeb; border-color: #b45309; }
+    .verdict-red    { background: #fef2f2; border-color: #dc2626; }
+
+    .verdict-box strong {
+      font-size: 11pt;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Section headings                                                     */
+    /* ------------------------------------------------------------------ */
+
+    h2 {
+      font-size: 13pt;
+      border-bottom: 2px solid #1e3a5f;
+      padding-bottom: 4px;
+      margin: 28px 0 12px 0;
+      color: #1e3a5f;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Status badges and dots                                               */
+    /* ------------------------------------------------------------------ */
+
+    .badge {
+      display: inline-block;
+      padding: 1px 7px;
+      border-radius: 3px;
+      font-size: 8pt;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .badge-green  { background: #16a34a; }
+    .badge-yellow { background: #b45309; }
+    .badge-red    { background: #dc2626; }
+
+    /* ------------------------------------------------------------------ */
+    /* Hardware table                                                       */
+    /* ------------------------------------------------------------------ */
+
+    .hw-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      margin-bottom: 12px;
+    }
+
+    .hw-table th {
+      background: #f1f5f9;
+      text-align: left;
+      padding: 6px 10px;
+      font-size: 9pt;
+    }
+
+    .hw-table td {
+      padding: 5px 10px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+
+    .hw-table .label-col {
+      color: #6b7280;
+      width: 35%;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Issues list                                                          */
+    /* ------------------------------------------------------------------ */
+
+    .issues {
+      margin: 8px 0 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .issues li {
+      padding: 3px 0 3px 16px;
+      font-size: 9.5pt;
+      color: #374151;
+    }
+
+    .issues li::before {
+      content: "- ";
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Boot key hint                                                        */
+    /* ------------------------------------------------------------------ */
+
+    .boot-hint {
+      background: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 9px 13px;
+      margin-top: 14px;
+      font-size: 9.5pt;
+      color: #1e40af;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* App tables                                                           */
+    /* ------------------------------------------------------------------ */
+
+    .app-group-header {
+      font-weight: bold;
+      font-size: 10pt;
+      padding: 7px 10px;
+      margin-top: 14px;
+    }
+
+    .app-group-header-green  { background: #dcfce7; color: #166534; }
+    .app-group-header-yellow { background: #fef9c3; color: #854d0e; }
+    .app-group-header-red    { background: #fee2e2; color: #991b1b; }
+
+    .app-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9pt;
+      margin-bottom: 6px;
+    }
+
+    .app-table th {
+      background: #f8fafc;
+      text-align: left;
+      padding: 5px 8px;
+      border-bottom: 1px solid #e5e7eb;
+      font-size: 8.5pt;
+      color: #374151;
+    }
+
+    .app-table td {
+      padding: 4px 8px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+
+    .app-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .app-table .col-name    { width: 30%; }
+    .app-table .col-package { width: 25%; font-family: "DejaVu Sans Mono", monospace; font-size: 8.5pt; color: #1d4ed8; }
+    .app-table .col-via     { width: 10%; }
+    .app-table .col-note    { color: #6b7280; }
+
+    .via-apt     { color: #15803d; }
+    .via-flatpak { color: #7c3aed; }
+
+    .no-apps {
+      font-size: 9.5pt;
+      color: #6b7280;
+      padding: 6px 0;
+      font-style: italic;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Install command                                                      */
+    /* ------------------------------------------------------------------ */
+
+    .install-box {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 13px 16px;
+      font-family: "DejaVu Sans Mono", monospace;
+      font-size: 8.5pt;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Links                                                               */
+    /* ------------------------------------------------------------------ */
+
+    a { color: #1d4ed8; }
+    a:visited { color: #1d4ed8; }
+
+    /* ------------------------------------------------------------------ */
+    /* Wine-Hinweis und Denkanstoß (nach der roten App-Liste)              */
+    /* ------------------------------------------------------------------ */
+
+    .wine-hint {
+      background: #fafafa;
+      border-left: 4px solid #9ca3af;
+      padding: 10px 14px;
+      margin-top: 12px;
+      font-size: 9.5pt;
+      color: #374151;
+    }
+
+    .wine-hint strong {
+      color: #111827;
+    }
+
+    .reflection-box {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-left: 4px solid #f59e0b;
+      padding: 12px 16px;
+      margin-top: 10px;
+      font-size: 9.5pt;
+      color: #374151;
+    }
+
+    .reflection-box strong {
+      color: #92400e;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Next steps                                                           */
+    /* ------------------------------------------------------------------ */
+
+    .next-steps {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      padding: 12px 16px;
+      margin-top: 8px;
+      font-size: 9.5pt;
+    }
+
+    .next-steps ol {
+      margin: 6px 0 0 0;
+      padding-left: 18px;
+    }
+
+    .next-steps li {
+      margin-bottom: 4px;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Footer                                                               */
+    /* ------------------------------------------------------------------ */
+
+    .footer {
+      margin-top: 32px;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 8px;
+      font-size: 7.5pt;
+      color: #9ca3af;
+    }
+
+    /* ------------------------------------------------------------------ */
+    /* Print helpers                                                        */
+    /* ------------------------------------------------------------------ */
+
+    tr { page-break-inside: avoid; }
+  </style>
+</head>
+<body>
+
+{# -------------------------------------------------------------------- #}
+{# Header                                                                #}
+{# -------------------------------------------------------------------- #}
+
+<div class="report-header">
+  <h1>Linux-Migrationsbericht</h1>
+  <p class="subtitle">
+    Erstellt am {{ report.generated_at.strftime("%d.%m.%Y") }}
+    um {{ report.generated_at.strftime("%H:%M") }} Uhr
+    {% if report.hardware.manufacturer or report.hardware.model %}
+    &nbsp;&middot;&nbsp;
+    {{ report.hardware.manufacturer or "" }} {{ report.hardware.model or "" }}
+    {% endif %}
+  </p>
+</div>
+
+{# -------------------------------------------------------------------- #}
+{# Programme - Zusammenfassung                                           #}
+{# -------------------------------------------------------------------- #}
+
+<table class="stats-bar">
+  <tr>
+    <td class="stat-green">
+      <span class="stat-number">{{ report.green_count }}</span>
+      <span class="stat-label">Direkt verfügbar</span>
+    </td>
+    <td class="stat-yellow">
+      <span class="stat-number">{{ report.yellow_count }}</span>
+      <span class="stat-label">Alternative vorhanden</span>
+    </td>
+    <td class="stat-red">
+      <span class="stat-number">{{ report.red_count }}</span>
+      <span class="stat-label">Kein Äquivalent</span>
+    </td>
+    <td>
+      <span class="stat-number">{{ report.apps | length }}</span>
+      <span class="stat-label">Programme gesamt</span>
+    </td>
+  </tr>
+</table>
+
+{# -------------------------------------------------------------------- #}
+{# Hardware-Analyse                                                       #}
+{# -------------------------------------------------------------------- #}
+
+<h2>Hardware-Analyse</h2>
+
+{# Overall hardware verdict box #}
+{% set hv = report.hardware_verdict %}
+<div class="verdict-box verdict-{{ hv.overall }}">
+  {% if hv.overall == "green" %}
+    <strong>Ihr Computer ist gut für Linux Mint geeignet.</strong>
+  {% elif hv.overall == "yellow" %}
+    <strong>Ihr Computer ist bedingt für Linux Mint geeignet.</strong>
+    Bitte beachten Sie die Hinweise unten.
+  {% else %}
+    <strong>Ihr Computer erfüllt nicht alle Mindestanforderungen für Linux Mint.</strong>
+    Bitte beachten Sie die Hinweise unten.
+  {% endif %}
+</div>
+
+{# Hardware details table #}
+<table class="hw-table">
+  <tr>
+    <th>Komponente</th>
+    <th>Wert</th>
+    <th>Status</th>
+  </tr>
+  <tr>
+    <td class="label-col">Prozessor</td>
+    <td>{{ report.hardware.cpu_name }}
+        ({{ report.hardware.cpu_cores }} Kerne,
+        {{ "64-Bit" if report.hardware.cpu_64bit else "32-Bit" }})</td>
+    <td><span class="badge badge-{{ hv.cpu_status }}">
+      {{ "OK" if hv.cpu_status == "green" else ("Eingeschränkt" if hv.cpu_status == "yellow" else "Problem") }}
+    </span></td>
+  </tr>
+  <tr>
+    <td class="label-col">Arbeitsspeicher</td>
+    <td>{{ "%.1f"|format(report.hardware.ram_gb) }} GB</td>
+    <td><span class="badge badge-{{ hv.ram_status }}">
+      {{ "OK" if hv.ram_status == "green" else ("Wenig" if hv.ram_status == "yellow" else "Zu wenig") }}
+    </span></td>
+  </tr>
+  <tr>
+    <td class="label-col">Freier Speicherplatz</td>
+    <td>{{ "%.0f"|format(report.hardware.disk_free_gb) }} GB</td>
+    <td><span class="badge badge-{{ hv.disk_status }}">
+      {{ "OK" if hv.disk_status == "green" else ("Knapp" if hv.disk_status == "yellow" else "Zu wenig") }}
+    </span></td>
+  </tr>
+  {% if report.hardware.gpu_name %}
+  <tr>
+    <td class="label-col">Grafikkarte</td>
+    <td>{{ report.hardware.gpu_name }}</td>
+    <td></td>
+  </tr>
+  {% endif %}
+  {% if report.hardware.wlan_chipset %}
+  <tr>
+    <td class="label-col">WLAN-Chip</td>
+    <td>{{ report.hardware.wlan_chipset }}</td>
+    <td></td>
+  </tr>
+  {% endif %}
+</table>
+
+{# Issues #}
+{% if hv.issues %}
+<ul class="issues">
+  {% for issue in hv.issues %}
+  <li>{{ issue }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{# Boot key hint #}
+{% if hv.boot_key_hint %}
+<div class="boot-hint">
+  Um Linux Mint von einem USB-Stick zu starten, drücken Sie beim
+  Einschalten Ihres Computers die Taste <strong>{{ hv.boot_key_hint }}</strong>,
+  um das Boot-Menü zu öffnen.
+</div>
+{% endif %}
+
+{# -------------------------------------------------------------------- #}
+{# Programme                                                              #}
+{# -------------------------------------------------------------------- #}
+
+<h2>Ihre Programme</h2>
+
+{% set green_apps  = report.apps | selectattr("category", "equalto", "green")  | list %}
+{% set yellow_apps = report.apps | selectattr("category", "equalto", "yellow") | list %}
+{% set red_apps    = report.apps | selectattr("category", "equalto", "red")    | list %}
+
+{# Green ---------------------------------------------------------------- #}
+<div class="app-group-header app-group-header-green">
+  Direkt verfügbar ({{ green_apps | length }})
+</div>
+
+{% if green_apps %}
+<table class="app-table">
+  <tr>
+    <th class="col-name">Windows-Programm</th>
+    <th class="col-package">Linux-Paket</th>
+    <th class="col-via">Quelle</th>
+    <th>Hinweis</th>
+  </tr>
+  {% for match in green_apps | sort(attribute="windows_app.name") %}
+  <tr>
+    <td class="col-name">{{ match.windows_app.name }}</td>
+    <td class="col-package">{{ match.linux_package or "" }}</td>
+    <td class="col-via">
+      {% if match.install_via == "apt" %}
+      <span class="via-apt">apt</span>
+      {% elif match.install_via == "flatpak" %}
+      <span class="via-flatpak">Flatpak</span>
+      {% endif %}
+    </td>
+    <td>{{ match.note or "" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="no-apps">Keine Programme direkt verfügbar.</p>
+{% endif %}
+
+{# Yellow --------------------------------------------------------------- #}
+<div class="app-group-header app-group-header-yellow">
+  Alternative vorhanden ({{ yellow_apps | length }})
+</div>
+
+{% if yellow_apps %}
+<table class="app-table">
+  <tr>
+    <th class="col-name">Windows-Programm</th>
+    <th class="col-package">Linux-Alternative</th>
+    <th class="col-via">Quelle</th>
+    <th>Hinweis</th>
+  </tr>
+  {% for match in yellow_apps | sort(attribute="windows_app.name") %}
+  <tr>
+    <td class="col-name">{{ match.windows_app.name }}</td>
+    <td class="col-package">{{ match.linux_package or "" }}</td>
+    <td class="col-via">
+      {% if match.install_via == "apt" %}
+      <span class="via-apt">apt</span>
+      {% elif match.install_via == "flatpak" %}
+      <span class="via-flatpak">Flatpak</span>
+      {% endif %}
+    </td>
+    <td>{{ match.note or "" }}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p class="no-apps">Keine Programme mit Alternative gefunden.</p>
+{% endif %}
+
+{# Red ------------------------------------------------------------------ #}
+<div class="app-group-header app-group-header-red">
+  Kein Linux-Äquivalent ({{ red_apps | length }})
+</div>
+
+{% if red_apps %}
+<table class="app-table">
+  <tr>
+    <th class="col-name">Windows-Programm</th>
+    <th>Hinweis</th>
+  </tr>
+  {% for match in red_apps | sort(attribute="windows_app.name") %}
+  <tr>
+    <td class="col-name">{{ match.windows_app.name }}</td>
+    <td>{{ match.note or "Kein Linux-Äquivalent bekannt." }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<div class="wine-hint">
+  <strong>Tipp: Windows-Programme trotzdem unter Linux ausführen</strong><br>
+  Viele dieser Programme lassen sich mit <strong>Wine</strong> oder dem
+  benutzerfreundlichen <strong>Bottles</strong> (kostenlos, via Flatpak installierbar)
+  unter Linux starten, ohne Windows zu benötigen. Die Kompatibilität
+  hängt vom jeweiligen Programm ab und kann auf
+  <strong>appdb.winehq.org</strong> vorab nachgeschaut werden.
+  Etwas Einarbeitungszeit ist einzuplanen.
+</div>
+
+<div class="reflection-box">
+  <strong>Eine Frage, die sich lohnt zu stellen:</strong><br>
+  Ist dieses Programm (oder sind diese Programme) wirklich
+  wichtiger als alle Vorteile, die Linux bietet? Kein Virenscanner nötig,
+  keine erzwungenen Neustarts, kein Datenschutz-Eingeständnis bei der
+  Einrichtung, ältere Hardware läuft oft deutlich schneller, und das
+  Betriebssystem gehört Ihnen vollständig.<br><br>
+  Oder anders gefragt: Überwiegen die Nachteile von Windows
+  (Tracking, Werbung, Zwangs-Updates, steigende Systemanforderungen)
+  wirklich den Verzicht auf dieses eine Programm?<br><br>
+  Oft lautet die ehrliche Antwort: Nein.
+</div>
+
+{% else %}
+<p class="no-apps">Alle Programme haben ein Linux-Äquivalent.</p>
+{% endif %}
+
+{# -------------------------------------------------------------------- #}
+{# Installations-Befehl                                                  #}
+{# -------------------------------------------------------------------- #}
+
+{% if report.install_command %}
+<h2>Installations-Befehl</h2>
+<p style="font-size:9.5pt; color:#374151;">
+  Führen Sie nach der Installation von Linux Mint folgenden Befehl im
+  Terminal aus, um alle verfügbaren Programme auf einmal zu installieren:
+</p>
+<div class="install-box">{{ report.install_command }}</div>
+{% endif %}
+
+{# -------------------------------------------------------------------- #}
+{# Nächste Schritte                                                      #}
+{# -------------------------------------------------------------------- #}
+
+<h2>Nächste Schritte</h2>
+<div class="next-steps">
+
+  <p style="margin-top:0; margin-bottom:14px; font-size:9.5pt;">
+    Die vollständige offizielle Installationsanleitung finden Sie unter:<br>
+    <a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/">
+      linuxmint-installation-guide.readthedocs.io
+    </a>
+  </p>
+
+  <ol>
+
+    <li>
+      <strong>Linux Mint herunterladen</strong><br>
+      Rufen Sie
+      <a href="https://www.linuxmint.com/download.php">linuxmint.com/download</a>
+      auf und wählen Sie die <strong>Cinnamon-Edition</strong> in der
+      <strong>64-Bit-Version</strong>. Der Download ist kostenlos und
+      ca.&nbsp;2,8&nbsp;GB groß. Speichern Sie die Datei an einem leicht zu
+      findenden Ort, z.&nbsp;B. dem Download-Ordner.
+    </li>
+
+    <li>
+      <strong>Bootfähigen USB-Stick erstellen</strong><br>
+      Sie benötigen einen leeren USB-Stick mit <strong>mindestens 8&nbsp;GB</strong>.
+      <em>Achtung: Alle bisherigen Daten auf dem Stick werden dabei gelöscht.</em>
+      <br><br>
+      Laden Sie <strong>Balena Etcher</strong> kostenlos herunter:
+      <a href="https://etcher.balena.io/">etcher.balena.io</a><br>
+      Installieren Sie Etcher und öffnen Sie es. Die Schritte:
+      <ol style="margin-top:6px; padding-left:18px;">
+        <li>Klicken Sie auf <em>„Flash from file"</em> und wählen Sie die
+            heruntergeladene Linux-Mint-Datei (.iso).</li>
+        <li>Klicken Sie auf <em>„Select target"</em> und wählen Sie Ihren USB-Stick
+            (und <strong>nicht</strong> die Festplatte Ihres Computers).</li>
+        <li>Klicken Sie auf <em>„Flash!"</em>. Der Vorgang dauert ca.&nbsp;5–10&nbsp;Minuten
+            und wird am Ende automatisch überprüft.</li>
+      </ol>
+    </li>
+
+    <li>
+      <strong>Computer vom USB-Stick starten</strong><br>
+      Schließen Sie alle Programme, stecken Sie den USB-Stick ein und starten Sie
+      den Computer neu.
+      {% if hv.boot_key_hint %}
+      Drücken Sie beim Einschalten sofort und wiederholt die Taste
+      <strong>{{ hv.boot_key_hint }}</strong>, bis das Boot-Menü erscheint.
+      {% else %}
+      Drücken Sie beim Einschalten die Boot-Menü-Taste Ihres Herstellers
+      (häufig F12, F9, F10 oder Esc; die Taste wird kurz auf dem Startbildschirm
+      eingeblendet).
+      {% endif %}
+      Wählen Sie im Boot-Menü Ihren USB-Stick aus. Im folgenden Grub-Menü wählen
+      Sie <em>„Start Linux Mint"</em>. Linux Mint startet direkt vom Stick,
+      Ihr Computer und Ihre Festplatte werden dabei <strong>nicht verändert</strong>.
+    </li>
+
+    <li>
+      <strong>Linux Mint ausprobieren (Live-Modus)</strong><br>
+      Sie sehen jetzt den vollständigen Linux-Mint-Desktop, ohne dass etwas
+      installiert wurde. Testen Sie in Ruhe: WLAN-Verbindung, Ton, Browser,
+      Bildschirmauflösung, Tastatur-Layout. Funktioniert alles zu Ihrer Zufriedenheit,
+      doppelklicken Sie auf das Symbol <em>„Linux Mint installieren"</em> auf dem Desktop.
+    </li>
+
+    <li>
+      <strong>Linux Mint installieren</strong><br>
+      Der Installations-Assistent führt Sie durch folgende Schritte:
+      <ol style="margin-top:6px; padding-left:18px;">
+        <li><strong>Sprache</strong> wählen (Deutsch).</li>
+        <li><strong>Tastatur-Layout</strong> wählen und testen.</li>
+        <li><strong>Multimedia-Codecs</strong>: Haken bei
+            <em>„Multimedia-Codecs von Drittanbietern installieren"</em> setzen
+            (das ermöglicht später die Wiedergabe von MP3, Videos usw.).</li>
+        <li><strong>Installationstyp</strong>: Wählen Sie
+            <em>„Festplatte löschen und Linux Mint installieren"</em>.
+            Das entfernt Windows vollständig und gibt Linux Mint den gesamten
+            Festplattenplatz. <strong>Wichtig:</strong> Alle wichtigen Dateien
+            müssen vorher auf einem externen Laufwerk oder in der Cloud gesichert sein.</li>
+        <li><strong>Zeitzone</strong> auswählen.</li>
+        <li><strong>Benutzerkonto</strong> anlegen: Ihren Namen, einen
+            Benutzernamen und ein sicheres Passwort eingeben. Dieses Passwort
+            benötigen Sie für Updates und Software-Installationen.</li>
+      </ol>
+      Die Installation läuft anschließend vollautomatisch
+      (~20–30&nbsp;Minuten). Am Ende klicken Sie auf
+      <em>„Jetzt neu starten"</em> und entfernen den USB-Stick, wenn Sie dazu
+      aufgefordert werden.
+    </li>
+
+    <li>
+      <strong>System aktualisieren und Treiber einrichten</strong><br>
+      Nach dem ersten Start empfiehlt die
+      <a href="https://linuxmint-installation-guide.readthedocs.io/en/latest/">offizielle Anleitung</a>
+      zwei wichtige Schritte:
+      <ol style="margin-top:6px; padding-left:18px;">
+        <li>Öffnen Sie den <strong>Update-Manager</strong> (Schild-Symbol in der Taskleiste)
+            und installieren Sie alle verfügbaren Updates.</li>
+        <li>Öffnen Sie den <strong>Treiber-Manager</strong>
+            (Startmenü &rarr; <em>„Treiber-Manager"</em>) und installieren Sie
+            empfohlene Treiber, besonders wichtig bei NVIDIA-Grafikkarten
+            und manchen WLAN-Chips.</li>
+      </ol>
+    </li>
+
+    <li>
+      <strong>Programme installieren</strong><br>
+      Öffnen Sie das Terminal (Rechtsklick auf den Desktop &rarr;
+      <em>„Terminal öffnen"</em>), kopieren Sie den
+      <strong>Installations-Befehl</strong> aus dem Abschnitt oben und fügen Sie
+      ihn mit <em>Strg+Umschalt+V</em> ein. Alle Ihre Programme werden damit
+      auf einmal installiert.
+    </li>
+
+  </ol>
+</div>
+
+{# -------------------------------------------------------------------- #}
+{# Footer                                                                 #}
+{# -------------------------------------------------------------------- #}
+
+<div class="footer">
+  Erstellt mit WindowsToLinux &middot; Alle Angaben ohne Gewähr &middot;
+  Linux Mint ist ein eingetragenes Warenzeichen der Linux Mint-Entwickler.
+</div>
+
+</body>
+</html>

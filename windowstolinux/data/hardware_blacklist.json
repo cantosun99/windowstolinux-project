@@ -1,0 +1,29 @@
+{
+  "_comment": "Hardware components with known poor Linux driver support. Substrings matched case-insensitively against GPU/WLAN chip names.",
+
+  "gpu_substrings": [
+    "Radeon HD 4000",
+    "Radeon HD 5000",
+    "Radeon HD 6000",
+    "Radeon HD 7000",
+    "GeForce 4",
+    "GeForce FX",
+    "GeForce 6",
+    "GeForce 7",
+    "Quadro NVS"
+  ],
+
+  "wlan_substrings": [
+    "BCM4311",
+    "BCM4312",
+    "BCM4313",
+    "BCM4321",
+    "BCM4322",
+    "BCM43224",
+    "BCM43225",
+    "BCM4360",
+    "RTL8188",
+    "RTL8192",
+    "MT7601"
+  ]
+}

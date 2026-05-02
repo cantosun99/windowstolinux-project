@@ -1,0 +1,62 @@
+name: EXE bauen und Release erstellen
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Code auschecken
+        uses: actions/checkout@v4
+
+      - name: Python 3.12 einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python-Pakete installieren
+        run: python -m pip install -e "." pyinstaller
+
+      - name: MSYS2 einrichten
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+
+      - name: GTK3-Pakete installieren und Pfad exportieren
+        shell: msys2 {0}
+        run: |
+          pacman -S --noconfirm --needed mingw-w64-x86_64-gtk3 mingw-w64-x86_64-pango mingw-w64-x86_64-librsvg mingw-w64-x86_64-libffi
+          echo "GTK_BIN=$(cygpath -w /mingw64/bin)" >> $GITHUB_ENV
+
+      - name: GTK-Installation verifizieren
+        run: |
+          $key = Get-ChildItem "$env:GTK_BIN" -Filter "*.dll" | Where-Object { $_.Name -match "libgobject|libcairo|libpango" }
+          if (-not $key) { Write-Error "GTK3-DLLs fehlen in $env:GTK_BIN"; exit 1 }
+          $key | ForEach-Object { Write-Host "OK  $($_.Name)" }
+
+      - name: EXE bauen
+        run: python -m PyInstaller windowstolinux.spec --clean --noconfirm
+
+      - name: EXE als Artefakt hochladen
+        uses: actions/upload-artifact@v4
+        with:
+          name: WindowsToLinux-${{ github.ref_name }}
+          path: dist/WindowsToLinux.exe
+          if-no-files-found: error
+
+      - name: GitHub Release erstellen
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/WindowsToLinux.exe
+          name: WindowsToLinux ${{ github.ref_name }}
+          generate_release_notes: true
