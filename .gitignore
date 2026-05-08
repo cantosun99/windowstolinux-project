@@ -44,4 +44,3 @@ demo_report.pdf
 # Secrets / lokale Konfiguration
 .env
 *.local
-tests/
